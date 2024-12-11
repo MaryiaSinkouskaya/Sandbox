@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Queue;
 
 public class Sandbox {
@@ -122,11 +123,47 @@ public class Sandbox {
 //    System.out.println(decodeString("3[abc2[def]]2[k]"));
 
     //task30
-    System.out.println(romanToInt("III"));
+//    System.out.println(romanToInt("III"));
+
+    //tsak31
+    ListNode l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+    ListNode l1 = new ListNode(9, new ListNode(9));
+
+    ListNode numbers = addTwoNumbers(l1, l2);
+    System.out.println(numbers);
 
   }
 
-  public static int romanToInt(String s) {
+  public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode result = new ListNode();
+    sumUp(l1, l2, result, false);
+    return result;
+  }
+
+  public static void sumUp(ListNode l1, ListNode l2, ListNode result, boolean hasExtra) {
+    result.val = l1.val + l2.val;
+    if (hasExtra) {
+      result.val++;
+    }
+    if (result.val >= 10) {
+      result.val %= 10;
+      hasExtra = true;
+    } else {
+      hasExtra = false;
+    }
+    if (Objects.nonNull(l1.next) || Objects.nonNull(l2.next)) {
+
+      ListNode next1 = Optional.ofNullable(l1.next).orElse(new ListNode(0));
+      ListNode next2 = Optional.ofNullable(l2.next).orElse(new ListNode(0));
+      result.next = new ListNode();
+      sumUp(next1, next2, result.next, hasExtra);
+    } else if (Objects.isNull(l1.next) && Objects.isNull(l2.next) && hasExtra == true) {
+      result.next = new ListNode(1);
+    }
+  }
+
+
+    public static int romanToInt(String s) {
     ArrayList<Integer> number = new ArrayList<>();
     for (char ch : s.toCharArray()) {
       number.add(convert(ch));
