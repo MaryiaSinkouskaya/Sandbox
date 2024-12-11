@@ -126,11 +126,18 @@ public class Sandbox {
 //    System.out.println(romanToInt("III"));
 
     //tsak31
-    ListNode l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
-    ListNode l1 = new ListNode(9, new ListNode(9));
+//    ListNode l2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+//    ListNode l1 = new ListNode(9, new ListNode(9));
+//
+//    ListNode numbers = addTwoNumbers(l1, l2);
+//    System.out.println(numbers);
 
-    ListNode numbers = addTwoNumbers(l1, l2);
-    System.out.println(numbers);
+    //task32
+    RecentCounter obj = new RecentCounter();
+    int ping = obj.ping(1);
+    int ping1 = obj.ping(100);
+    int ping2 = obj.ping(3001);
+    int ping3 = obj.ping(3002);
 
   }
 
