@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Queue;
 
@@ -115,7 +116,78 @@ public class Sandbox {
     //        new int[] { 5, 5, 10, 20, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 5, 5, 20, 5, 20, 5 }));
 
     //task 28
-    System.out.println(canJump(new int[] { 3,2,1,0,4 }));
+//    System.out.println(canJump(new int[] { 3,2,1,0,4 }));
+
+    //task29
+//    System.out.println(decodeString("3[abc2[def]]2[k]"));
+
+    //task30
+    System.out.println(romanToInt("III"));
+
+  }
+
+  public static int romanToInt(String s) {
+    ArrayList<Integer> number = new ArrayList<>();
+    for (char ch : s.toCharArray()) {
+      number.add(convert(ch));
+    }
+
+    ListIterator<Integer> iterator = number.listIterator();
+    int result = 0;
+    Integer current = iterator.next();
+    while (iterator.hasNext()) {
+      Integer next = iterator.next();
+      if (next > current) {
+        result -= current;
+      } else {
+        result += current;
+      }
+      current = next;
+    }
+
+    return result + current;
+  }
+
+  private static Integer convert(Character ch) {
+    return switch (ch) {
+      case 'I' -> 1;
+      case 'V' -> 5;
+      case 'X' -> 10;
+      case 'L' -> 50;
+      case 'C' -> 100;
+      case 'D' -> 500;
+      case 'M' -> 1000;
+      default -> 0;
+    };
+  }
+
+  public static String decodeString(String s) {
+    Deque<Integer> repetitionNumbers = new ArrayDeque<>();
+    Deque<StringBuilder> substrings = new ArrayDeque<>();
+    StringBuilder stringBuilder = new StringBuilder();
+    int repNum = 0;
+
+    for (char c : s.toCharArray()) {
+      if (Character.isDigit(c)) {
+        repNum = repNum * 10 + Integer.valueOf(String.valueOf(c));
+      } else if (c == '[') {
+        repetitionNumbers.push(repNum);
+        repNum = 0;
+        substrings.push(stringBuilder);
+        stringBuilder = new StringBuilder();
+      } else if (c == ']') {
+        int k = repetitionNumbers.pop();
+        StringBuilder temp = stringBuilder;
+        stringBuilder = substrings.pop();
+        while (k-- > 0) {
+          stringBuilder.append(temp);
+        }
+      } else if (Character.isAlphabetic(c)){
+        stringBuilder.append(c);
+      }
+    }
+
+    return stringBuilder.toString();
 
   }
 
