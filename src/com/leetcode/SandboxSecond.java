@@ -7,7 +7,66 @@ public class SandboxSecond {
 //        System.out.println(deleteMiddle(list));
 
         //task34
-        System.out.println(getFinalState(new int[] {2,1,3,5,6}, 5,2));
+//        System.out.println(getFinalState(new int[] {2,1,3,5,6}, 5,2));
+
+        //task35
+//        ListNode list = new ListNode(2, new ListNode(1,
+//            new ListNode(3, new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(7)))))));
+//        System.out.println(oddEvenList(list));
+
+        //task36
+        ListNode list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+        System.out.println(reverseList(list));
+
+    }
+
+    public static ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+
+        ListNode current = head.next;
+        ListNode previous = head;
+        ListNode next;
+        while (current != null) {
+            next = current.next;
+            current.next = head;
+            head = current;
+
+            previous.next = next;
+
+            current = next;
+        }
+        return head;
+    }
+
+
+    public static ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode current = head;
+
+        ListNode initBuffNode = new ListNode(0);
+        ListNode buffNode = initBuffNode;
+
+        while (true) {
+            if (current.next != null) {
+                buffNode.next = current.next;
+                buffNode = buffNode.next;
+
+                current.next = current.next.next;
+
+            }
+            if (current.next == null) {
+                break;
+            }
+            current = current.next;
+
+        }
+        buffNode.next = null;
+        current.next = initBuffNode.next;
+        return head;
     }
 
     public static int[] getFinalState(int[] nums, int k, int multiplier) {
