@@ -15,13 +15,47 @@ public class SandboxSecond {
 //        System.out.println(oddEvenList(list));
 
         //task36
+//        ListNode list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+//        System.out.println(reverseList(list));
+
+        //task37
         ListNode list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
-        System.out.println(reverseList(list));
+        System.out.println(pairSum(list));
+    }
+
+    public static int pairSum(ListNode head) {
+        int length = getLength(head);
+        if (length == 2) {
+            return head.val + head.next.val;
+        }
+
+        int middleIndex = length / 2;
+
+        int counter = 0;
+        ListNode node = head;
+        while (counter < middleIndex - 1) {
+            counter++;
+            node = node.next;
+        }
+        node = reverseList(node.next);
+
+        int sum = 0;
+        while (head != null && node != null) {
+            int tempSum = head.val + node.val;
+            if (tempSum > sum) {
+                sum = tempSum;
+            }
+            head = head.next;
+            node = node.next;
+        }
+
+        return sum;
+
 
     }
 
     public static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null){
+        if (head == null || head.next == null) {
             return head;
         }
 
@@ -42,7 +76,7 @@ public class SandboxSecond {
 
 
     public static ListNode oddEvenList(ListNode head) {
-        if (head == null || head.next == null){
+        if (head == null || head.next == null) {
             return head;
         }
         ListNode current = head;
@@ -91,15 +125,15 @@ public class SandboxSecond {
 
     public static ListNode deleteMiddle(ListNode head) {
         int length = getLength(head);
-        if (length == 1){
+        if (length == 1) {
             return null;
         }
 
-        int middleIndex = length / 2 ;
+        int middleIndex = length / 2;
 
         int counter = 0;
         ListNode node = head;
-        while (counter < middleIndex -1){
+        while (counter < middleIndex - 1) {
             counter++;
             node = node.next;
         }
