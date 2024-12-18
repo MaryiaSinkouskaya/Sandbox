@@ -1,5 +1,9 @@
 package com.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class SandboxSecond {
     public static void main(String[] args) {
         //task 33
@@ -19,8 +23,62 @@ public class SandboxSecond {
 //        System.out.println(reverseList(list));
 
         //task37
-        ListNode list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
-        System.out.println(pairSum(list));
+//        ListNode list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+//        System.out.println(pairSum(list));
+
+        //task38
+        TreeNode treeNode1 = new TreeNode(3,
+
+                                new TreeNode(9,
+ new TreeNode(15, null, null), new TreeNode(7, null, null)),
+
+                                                                      new TreeNode(20,
+                                       new TreeNode(14, null, null), new TreeNode(17, null, null)));
+
+        TreeNode treeNode2 = new TreeNode(289,
+
+                              new TreeNode(37,
+ new TreeNode(15, null, null), new TreeNode(7, null, null)),
+
+                                                        new TreeNode(87,
+                        new TreeNode(14, null, null), new TreeNode(17, null, null)));
+
+
+        System.out.println(leafSimilar(treeNode1, treeNode2));
+    }
+
+
+    public static boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> leafs1 = new ArrayList<>();
+        List<Integer> leafs2 = new ArrayList<>();
+        getLeafs(root1, leafs1);
+        getLeafs(root2, leafs2);
+        return isEqualLists(leafs1, leafs2);
+    }
+
+    private static void getLeafs(TreeNode treeNode, List<Integer> leafs){
+        if (treeNode.left == null && treeNode.right == null) {
+            leafs.add(treeNode.val);
+        } else {
+            if (treeNode.left != null) {
+                getLeafs(treeNode.left, leafs);
+            }
+            if (treeNode.right != null) {
+                getLeafs(treeNode.right, leafs);
+            }
+        }
+    }
+
+    private static boolean isEqualLists(List<Integer> list1, List<Integer> list2) {
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+        for (int i = 0; i < list1.size(); i++) {
+            if (!Objects.equals(list1.get(i), list2.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static int pairSum(ListNode head) {
