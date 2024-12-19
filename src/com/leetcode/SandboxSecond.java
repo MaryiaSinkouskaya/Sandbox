@@ -1,6 +1,7 @@
 package com.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,8 +60,35 @@ public class SandboxSecond {
 //        int[] x = finalPrices(new int[] { 10, 1, 1, 6 });
 //        System.out.println(x);
 
+        //task41
+        System.out.println(lengthOfLongestSubstring("dvdf"));
+
     }
 
+    public static int lengthOfLongestSubstring(String s) {
+        int length = s.length();
+        if (s.isEmpty()) {
+            return 0;
+        } else if (length == 1){
+            return 1;
+        }
+        int max = 0;
+        int j = 0;
+        HashSet<Character> set = new HashSet<>();
+        for (int i = 0; i < length; i++) {
+            if (!set.contains(s.charAt(i))) {
+                set.add(s.charAt(i));
+            } else {
+                if (set.size() > max) {
+                    max = set.size();
+                }
+                set.clear();
+                j++;
+                i = j - 1;
+            }
+        }
+        return Math.max(max, set.size());
+    }
 
     public static int[] finalPrices(int[] prices) {
         for (int i = 0; i < prices.length; i++) {
