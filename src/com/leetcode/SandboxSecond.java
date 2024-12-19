@@ -27,24 +27,70 @@ public class SandboxSecond {
 //        System.out.println(pairSum(list));
 
         //task38
-        TreeNode treeNode1 = new TreeNode(3,
+//        TreeNode treeNode1 = new TreeNode(3,
+//
+//                                new TreeNode(9,
+// new TreeNode(15, null, null), new TreeNode(7, null, null)),
+//
+//                                                                      new TreeNode(20,
+//                                       new TreeNode(14, null, null), new TreeNode(17, null, null)));
+//
+//        TreeNode treeNode2 = new TreeNode(289,
+//
+//                              new TreeNode(37,
+// new TreeNode(15, null, null), new TreeNode(7, null, null)),
+//
+//                                                        new TreeNode(87,
+//                        new TreeNode(14, null, null), new TreeNode(17, null, null)));
+//
+//
+//        System.out.println(leafSimilar(treeNode1, treeNode2));
 
-                                new TreeNode(9,
- new TreeNode(15, null, null), new TreeNode(7, null, null)),
+//task39
+//        TreeNode treeNode = new TreeNode(3,
+//            new TreeNode(1,
+//                new TreeNode(3, null, null), new TreeNode(1, null, null)),
+//
+//            new TreeNode(4,
+//                new TreeNode(1, null, null), new TreeNode(5, null, null)));
+//        System.out.println(goodNodes(treeNode));
+//
+//task40
+//        int[] x = finalPrices(new int[] { 10, 1, 1, 6 });
+//        System.out.println(x);
 
-                                                                      new TreeNode(20,
-                                       new TreeNode(14, null, null), new TreeNode(17, null, null)));
-
-        TreeNode treeNode2 = new TreeNode(289,
-
-                              new TreeNode(37,
- new TreeNode(15, null, null), new TreeNode(7, null, null)),
-
-                                                        new TreeNode(87,
-                        new TreeNode(14, null, null), new TreeNode(17, null, null)));
+    }
 
 
-        System.out.println(leafSimilar(treeNode1, treeNode2));
+    public static int[] finalPrices(int[] prices) {
+        for (int i = 0; i < prices.length; i++) {
+            int j = i + 1;
+            while (j < prices.length) {
+                if (prices[j] <= prices[i]) {
+                    prices[i] -= prices[j];
+                    break;
+                }
+                j++;
+            }
+        }
+        return prices;
+    }
+
+    public static int goodNodes(TreeNode root) {
+        return goodNodeCheck(root, 0, Integer.MIN_VALUE);
+    }
+
+    private static int goodNodeCheck(TreeNode node, int number, int maxValue) {
+        if (node == null) {
+            return number;
+        }
+        if (node.val >= maxValue) {
+            maxValue = node.val;
+            number++;
+        }
+        number = goodNodeCheck(node.left, number, maxValue);
+        number = goodNodeCheck(node.right, number, maxValue);
+        return number;
     }
 
 
