@@ -1,6 +1,7 @@
 package com.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -63,6 +64,28 @@ public class SandboxSecond {
         //task41
         System.out.println(lengthOfLongestSubstring("dvdf"));
 
+        //task42
+        System.out.println(thirdMax(new int[] {2, 4, 1}));
+    }
+
+
+    public static int thirdMax(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        } else if (nums.length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+
+        Arrays.sort(nums);
+        int count = 0;
+        int i = nums.length - 1;
+        while (count != 2) {
+            if (nums[i] > nums[i - 1]) {
+                count++;
+            }
+            i--;
+        }
+        return nums[i];
     }
 
     public static int lengthOfLongestSubstring(String s) {
@@ -120,7 +143,6 @@ public class SandboxSecond {
         number = goodNodeCheck(node.right, number, maxValue);
         return number;
     }
-
 
     public static boolean leafSimilar(TreeNode root1, TreeNode root2) {
         List<Integer> leafs1 = new ArrayList<>();
