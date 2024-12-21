@@ -62,10 +62,29 @@ public class SandboxSecond {
 //        System.out.println(x);
 
         //task41
-        System.out.println(lengthOfLongestSubstring("dvdf"));
+//        System.out.println(lengthOfLongestSubstring("dvdf"));
 
         //task42
-        System.out.println(thirdMax(new int[] {2, 4, 1}));
+//        System.out.println(thirdMax(new int[] {2, 4, 1}));
+
+        //task43
+//        System.out.println(findKthLargest(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4));
+
+        //task44
+//        SmallestInfiniteSet smallestInfiniteSet = new SmallestInfiniteSet();
+//        int i1 = smallestInfiniteSet.popSmallest();
+//        int i2 = smallestInfiniteSet.popSmallest();
+//        int i3 = smallestInfiniteSet.popSmallest();
+//        int i4 = smallestInfiniteSet.popSmallest();
+//        smallestInfiniteSet.addBack(3);
+//        smallestInfiniteSet.addBack(4);
+
+    }
+
+    public static int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+
+        return nums[nums.length - k];
     }
 
 
@@ -92,7 +111,7 @@ public class SandboxSecond {
         int length = s.length();
         if (s.isEmpty()) {
             return 0;
-        } else if (length == 1){
+        } else if (length == 1) {
             return 1;
         }
         int max = 0;
@@ -152,7 +171,7 @@ public class SandboxSecond {
         return isEqualLists(leafs1, leafs2);
     }
 
-    private static void getLeafs(TreeNode treeNode, List<Integer> leafs){
+    private static void getLeafs(TreeNode treeNode, List<Integer> leafs) {
         if (treeNode.left == null && treeNode.right == null) {
             leafs.add(treeNode.val);
         } else {
